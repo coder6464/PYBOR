@@ -1,24 +1,5 @@
 # Copyright © 2017 Ondrej Martinsky, All rights reserved
 # http://github.com/omartinsky/pybor
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 
 from instruments.deposit import *
 from instruments.zerorate import *
@@ -116,8 +97,8 @@ class CurveBuilder:
     def __init__(self, excel_file, eval_date, progress_monitor=None):
         assert os.path.exists(excel_file)
         xl = ExcelFile(excel_file)
-        self.df_instruments = xl.parse('Instrument Properties', index_col='Name', parse_cols='A:L').dropna()
-        self.df_curves = xl.parse('Curve Properties', index_col='Curve', parse_cols='A:C').dropna()
+        self.df_instruments = xl.parse('Instrument Properties', index_col='Name', parse_cols='A:L')
+        self.df_curves = xl.parse('Curve Properties', index_col='Curve', parse_cols='A:C')
         if (len(self.df_curves) == 0):
             raise BaseException("No curves found in spreadsheet")
         self.curve_templates = list()
